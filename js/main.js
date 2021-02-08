@@ -1,4 +1,4 @@
-document.querySelector('button').addEventListener('click', spin)
+document.querySelector('#spinBtn').addEventListener('click', spin)
 
 function spin() {
     let slot1RandomNumber = Math.floor(Math.random() * 10 + 20)
@@ -15,14 +15,11 @@ function spin() {
     let j = 0
     let k = 0
 
-    spin2win = setInterval(spin1, 50)
-    spin2win2 = setInterval(spin2, 50)
-    spin2win3 = setInterval(spin3, 50)
+    spin2win = setInterval(spinReel1, 50)
+    spin2win2 = setInterval(spinReel2, 50)
+    spin2win3 = setInterval(spinReel3, 50)
 
-    console.log(slot1RandomNumber, slot2RandomNumber, slot3RandomNumber)
-
-
-    function spin1() {
+    function spinReel1() {
 
         testingNumber1++
         i++
@@ -36,7 +33,7 @@ function spin() {
             slot1.src = arr[i]
         }
     }
-    function spin2() {
+    function spinReel2() {
         testingNumber2++
         j++
         if (testingNumber2 >= slot2RandomNumber) {
@@ -49,7 +46,7 @@ function spin() {
             slot2.src = arr[j]
         }
     }
-    function spin3() {
+    function spinReel3() {
         testingNumber3++
         k++
         if (testingNumber3 >= slot3RandomNumber) {

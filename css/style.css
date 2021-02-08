@@ -17,11 +17,11 @@
   margin-left: auto;
   margin-right: auto;
   margin-top: 2%;
+  font-size: 2rem;
 }
 
 #jackpot {
-  border: 2px red solid;
-  width: 30vw;
+  width: 40vw;
   height: 10vh;
 }
 
@@ -42,4 +42,25 @@
   display: flex;
   justify-content: space-between;
   font-size: 2rem;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+#spinBtn {
+  margin: 1%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15vw;
+  height: 10vh;
+  /* border: 2px solid greenyellow; */
+  font-size: 3.5rem;
+}
+
+.betBorder {
+  border: 2px solid yellow;
 }

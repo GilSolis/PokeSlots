@@ -14,7 +14,8 @@
 
     <img id='logo' src="img/PokeSlots.png" alt="">
     <div id='jackpot'>
-        <h2>Jackpot</h2>
+        <h2>Jackpot:
+        </h2>
     </div>
     <div class="reelContainer">
         <img id='img1' src="img/pokeball.svg" alt="">
@@ -22,10 +23,10 @@
         <img id='img3' src="img/pokeball.svg" alt="">
     </div>
     <div id="bets">
-        <button> &nbsp Min Bet &nbsp </button>
-        <button> &nbsp Max Bet &nbsp </button>
+        <button id="minBet" class="betBtn "> &nbsp Min Bet &nbsp </button>
+        <button id="maxBet" class='betBtn '> &nbsp Max Bet &nbsp </button>
     </div>
-    <span>Score: 1000</span>
+    <span>Score: <p id='score'>1000</p></span>
     <button id="spinBtn">Spin</button>
     <script src='js/main.js'></script>
 </body>

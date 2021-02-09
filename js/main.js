@@ -13,9 +13,9 @@ document.querySelector('h2').innerText = `Jackpot: ${jackpot}`
 document.querySelector('#score').innerText = score
 
 function spin() {
-    let slot1RandomNumber = Math.floor(Math.random() * 10 + 1)
-    let slot2RandomNumber = Math.floor(Math.random() * 10 + 1)
-    let slot3RandomNumber = Math.floor(Math.random() * 10 + 1)
+    let slot1RandomNumber = Math.floor(Math.random() * 10 + 20)
+    let slot2RandomNumber = Math.floor(Math.random() * 10 + 35)
+    let slot3RandomNumber = Math.floor(Math.random() * 10 + 50)
     let slot1 = document.getElementById('img1')
     let slot2 = document.getElementById('img2')
     let slot3 = document.getElementById('img3')
@@ -34,7 +34,6 @@ function spin() {
     spin2win3 = setInterval(spinReel3, 50)
 
     function spinReel1() {
-
         testingNumber1++
         i++
         if (testingNumber1 >= slot1RandomNumber) {
@@ -65,7 +64,7 @@ function spin() {
         k++
         if (testingNumber3 >= slot3RandomNumber) {
             clearInterval(spin2win3)
-            checkForJackpot()
+            console.log('i spun')
         }
 
         if (k === 5) {
@@ -82,16 +81,24 @@ function spin() {
 function minBet() {
     isMinBet = true
     isMaxBet = false
-    minBet = document.querySelector("#minBet").className = ""
-    minBet = document.querySelector("#minBet").className += "betBorder "
-    maxBet = document.querySelector("#maxBet").className -= "betBorder "
-    maxBet = document.querySelector("#maxBet").className = ""
+    checkForJackpot()
+    updateScore()
+    console.log("min bet should be true it is " + isMinBet)
+    console.log("max bet should be false it is " + isMaxBet)
+    // isMinBet = true
+    // isMaxBet = false
+    // minBet = document.querySelector("#minBet").className = ""
+    // minBet = document.querySelector("#minBet").className += "betBorder "
+    // maxBet = document.querySelector("#maxBet").className -= "betBorder "
+    // maxBet = document.querySelector("#maxBet").className = ""
 
-    console.log(isMinBet, isMaxBet)
+    // console.log(isMinBet, isMaxBet)
 }
 function maxBet() {
     isMinBet = false
     isMaxBet = true
+    console.log("min bet should be false it is " + isMinBet)
+    console.log("max bet should be true it is " + isMaxBet)
     maxBet = document.querySelector("#maxBet").className += ""
     maxBet = document.querySelector("#maxBet").className += "betBorder "
     minBet = document.querySelector("#minBet").className -= "betBorder "
@@ -103,14 +110,13 @@ function updateScore() {
     console.log("JP is " + isJackpot)
     console.log("JM3P is " + isMatchingThree)
 
-    if (isJackpot === true) {
-        // alert('jackpot')
+    if (isJackpot) {
         score += jackpot
         jackpot = 0
         document.querySelector('#score').innerText = score
         document.querySelector('h2').innerText = `Jackpot: ${jackpot}`
 
-    } else if (isMatchingThree === true) {
+    } else if (isMatchingThree) {
         score += 2000
         jackpot = jackpot - 2000
         document.querySelector('#score').innerText = score
@@ -124,20 +130,23 @@ function updateScore() {
 }
 
 function checkForJackpot() {
-    let slot1 = document.getElementById('img1').src
+    let slot1 = document.querySelector('#img1').src
     let slot2 = document.getElementById('img2').src
     let slot3 = document.getElementById('img3').src
-    // let pokeBalls = 'img/pokeball.svg'
 
-    if (slot1 === slot2 && slot2 === slot3 & slot3 === 'img/pokeball.svg') {
+    //way too complicated to check for a jackpot
+    let jpImage = slot1.split('/')
+    let jpImageLength = jpImage.length
+    console.log(jpImage[jpImageLength - 1])
+
+
+    if (slot1 === slot2 && slot2 === slot3 && jpImage[jpImageLength - 1] === 'pokeball.svg') {
         isJackpot = true
-        alert('jackpot!!!')
+        console.log('jackpot!!!')
         console.log("jackpot is " + isJackpot)
     } else if (slot1 === slot2 && slot2 === slot3) {
-        alert('matching 3')
+        console.log('matching 3')
         isMatchingThree = true
         console.log("matching 3  is " + isMatchingThree)
     }
-
-    updateScore()
 }

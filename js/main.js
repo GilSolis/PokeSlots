@@ -7,13 +7,15 @@ let isMaxBet = false
 let score = 1000
 let jackpot = 5000
 let isJackpot = false
+let isMatchingThree = false
 
 document.querySelector('h2').innerText = `Jackpot: ${jackpot}`
+document.querySelector('#score').innerText = score
 
 function spin() {
-    let slot1RandomNumber = Math.floor(Math.random() * 10 + 20)
-    let slot2RandomNumber = Math.floor(Math.random() * 10 + 35)
-    let slot3RandomNumber = Math.floor(Math.random() * 10 + 50)
+    let slot1RandomNumber = Math.floor(Math.random() * 10 + 1)
+    let slot2RandomNumber = Math.floor(Math.random() * 10 + 1)
+    let slot3RandomNumber = Math.floor(Math.random() * 10 + 1)
     let slot1 = document.getElementById('img1')
     let slot2 = document.getElementById('img2')
     let slot3 = document.getElementById('img3')
@@ -24,7 +26,8 @@ function spin() {
     let i = 0
     let j = 0
     let k = 0
-
+    isJackpot = false
+    isMatchingThree = false
 
     spin2win = setInterval(spinReel1, 50)
     spin2win2 = setInterval(spinReel2, 50)
@@ -62,7 +65,7 @@ function spin() {
         k++
         if (testingNumber3 >= slot3RandomNumber) {
             clearInterval(spin2win3)
-            updateJackpot()
+            checkForJackpot()
         }
 
         if (k === 5) {
@@ -96,25 +99,45 @@ function maxBet() {
     console.log(isMinBet, isMaxBet)
 }
 
-function updateJackpot() {
-    checkForJackpot()
+function updateScore() {
+    console.log("JP is " + isJackpot)
+    console.log("JM3P is " + isMatchingThree)
+
     if (isJackpot === true) {
+        // alert('jackpot')
         score += jackpot
+        jackpot = 0
+        document.querySelector('#score').innerText = score
+        document.querySelector('h2').innerText = `Jackpot: ${jackpot}`
+
+    } else if (isMatchingThree === true) {
+        score += 2000
+        jackpot = jackpot - 2000
+        document.querySelector('#score').innerText = score
+        document.querySelector('h2').innerText = `Jackpot: ${jackpot}`
     } else {
         jackpot += 25
+        score -= 25
         document.querySelector('h2').innerText = `Jackpot: ${jackpot}`
+        document.querySelector('#score').innerText = score
     }
 }
 
 function checkForJackpot() {
-    let slot1 = document.getElementById('img1')
-    let slot2 = document.getElementById('img2')
-    let slot3 = document.getElementById('img3')
-    let pokeBalls = 'img/pokeball.svg'
+    let slot1 = document.getElementById('img1').src
+    let slot2 = document.getElementById('img2').src
+    let slot3 = document.getElementById('img3').src
+    // let pokeBalls = 'img/pokeball.svg'
 
-    if (slot1.src === pokeBalls && slot2.src === pokeBalls && slot3.src === pokeBalls) {
+    if (slot1 === slot2 && slot2 === slot3 & slot3 === 'img/pokeball.svg') {
         isJackpot = true
+        alert('jackpot!!!')
+        console.log("jackpot is " + isJackpot)
+    } else if (slot1 === slot2 && slot2 === slot3) {
+        alert('matching 3')
+        isMatchingThree = true
+        console.log("matching 3  is " + isMatchingThree)
     }
 
-    console.log(slot1.src)
+    updateScore()
 }
